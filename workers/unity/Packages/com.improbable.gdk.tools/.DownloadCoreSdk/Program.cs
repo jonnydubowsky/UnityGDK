@@ -22,6 +22,7 @@ namespace Improbable
             var schemaStdLibDir = Path.GetFullPath(args[2]);
             var nativeDependenciesPath = Path.GetFullPath("./Assets/Plugins/Improbable/Core");
             var managedDependenciesPath = Path.GetFullPath("./Assets/Plugins/Improbable/Sdk");
+            var newPath = Path.GetFullPath("./Assets/Plugins");
             var tempPath = Path.GetFullPath($"./build/CoreSdk/{coreSdkVersion}");
 
             var packages = new List<Package>
@@ -29,10 +30,10 @@ namespace Improbable
                 new Package(tempPath, "worker_sdk", "c-dynamic-x86_64-msvc_mt-win32", $"{nativeDependenciesPath}/Windows/x86_64", new List<string> {"include", "worker.lib"}),
                 new Package(tempPath, "worker_sdk", "c-dynamic-x86_64-gcc_libstdcpp-linux", $"{nativeDependenciesPath}/Linux/x86_64", new List<string> {"include"}),
                 new Package(tempPath, "worker_sdk", "c-bundle-x86_64-clang_libcpp-macos", $"{nativeDependenciesPath}/OSX", new List<string> {"include"}),
-                new Package(tempPath, "worker_sdk", "c-static-fullylinked-arm-clang_libcpp-ios", $"{nativeDependenciesPath}/iOS/arm", new List<string> {"include", "libworker_static_combined.a.pic", "worker_static_combined.lib"}),
-                new Package(tempPath, "worker_sdk", "c-static-fullylinked-x86_64-clang_libcpp-ios", $"{nativeDependenciesPath}/iOS/x86_64", new List<string> {"include", "libworker_static_combined.a.pic", "worker_static_combined.lib"}),
+                new Package(tempPath, "worker_sdk", "c-static-fullylinked-arm-clang_libcpp-ios", $"{nativeDependenciesPath}/iOS/arm", new List<string> {"include", "libworker_static_fullylinked.a.pic", "worker_static_fullylinked.lib"}),
+                new Package(tempPath, "worker_sdk", "c-static-fullylinked-x86_64-clang_libcpp-ios", $"{nativeDependenciesPath}/iOS/x86_64", new List<string> {"include", "libworker_static_fullylinked.a.pic", "worker_static_fullylinked.lib"}),
                 new Package(tempPath, "worker_sdk", "csharp_core", $"{managedDependenciesPath}/OSX"),
-                new Package(tempPath, "worker_sdk", "csharp_core-static", $"{managedDependenciesPath}/iOS"),
+                new Package(tempPath, "worker_sdk", "csharp_core-static", $"{newPath}/iOS"),
                 new Package(tempPath, "schema", "standard_library", schemaStdLibDir),
                 new Package(tempPath, "tools", "schema_compiler-x86_64-win32", $"{tempPath}/schema_compiler", null, OSPlatform.Windows),
                 new Package(tempPath, "tools", "schema_compiler-x86_64-macos", $"{tempPath}/schema_compiler", null, OSPlatform.OSX),
