@@ -9,7 +9,8 @@
         "Unity.Entities.Hybrid",
         "Unity.Mathematics",
         "Improbable.Gdk.Generated",
-        "Improbable.Gdk.StandardLibraryUtils"
+        "Improbable.Gdk.StandardLibraryUtils",
+        "Improbable.Gdk.Android"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

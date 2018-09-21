@@ -1,6 +1,8 @@
 {
     "name": "Improbable.Gdk.Android",
-    "references": [],
+    "references": [
+        "Improbable.Gdk.Core"
+    ],
     "optionalUnityReferences": [],
     "includePlatforms": [
         "Android",
