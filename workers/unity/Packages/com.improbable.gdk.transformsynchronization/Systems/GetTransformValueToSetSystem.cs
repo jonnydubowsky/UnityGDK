@@ -2,6 +2,7 @@
 using Improbable.Transform;
 using Unity.Collections;
 using Unity.Entities;
+using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
 
 #region Diagnostic control
@@ -44,7 +45,9 @@ namespace Improbable.Gdk.TransformSynchronization
                 var currentTransform = new TransformToSet
                 {
                     Position = buffer[0].Position + worker.Origin,
-                    Orientation = buffer[0].Orientation
+                    Orientation = buffer[0].Orientation,
+                    Velocity = buffer[0].Velocity,
+                    ApproximateRemoteTick = buffer[0].PhysicsTick
                 };
 
                 data.CurrentTransform[i] = currentTransform;

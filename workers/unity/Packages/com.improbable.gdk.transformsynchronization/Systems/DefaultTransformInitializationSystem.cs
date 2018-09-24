@@ -23,11 +23,12 @@ namespace Improbable.Gdk.TransformSynchronization
         {
             public readonly int Length;
             [ReadOnly] public EntityArray Entity;
+            [ReadOnly] public ComponentDataArray<ClientInterpolationConfig> Config;
             [ReadOnly] public ComponentDataArray<TransformInternal.Component> Transform;
 
             // This can't work once we put proper interest in. Will need to completely decouple transform and position
             [ReadOnly] public ComponentDataArray<Position.Component> Position;
-            [ReadOnly] public ComponentDataArray<NewlyAddedSpatialOSEntity> DenotesNewEntity;
+            [ReadOnly] public SubtractiveComponent<TransformToSend> DenotesNotInitialized;
         }
 
         [Inject] private Data data;
@@ -43,7 +44,8 @@ namespace Improbable.Gdk.TransformSynchronization
                 {
                     Position = transform.Location.ToUnityVector3() + worker.Origin,
                     Velocity = transform.Velocity.ToUnityVector3(),
-                    Orientation = transform.Rotation.ToUnityQuaternion()
+                    Orientation = transform.Rotation.ToUnityQuaternion(),
+                    ApproximateRemoteTick = 0
                 };
                 var defaultToSend = new TransformToSend
                 {

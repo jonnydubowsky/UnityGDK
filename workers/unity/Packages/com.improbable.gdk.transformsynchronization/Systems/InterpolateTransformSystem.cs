@@ -29,6 +29,7 @@ namespace Improbable.Gdk.TransformSynchronization
             public BufferArray<BufferedTransform> TransformBuffer;
             public ComponentDataArray<DefferedUpdateTransform> LastTransformValue;
             public ComponentDataArray<TicksSinceLastTransformUpdate> TicksSinceLastUpdate;
+            [ReadOnly] public ComponentDataArray<ClientInterpolationConfig> Config;
             [ReadOnly] public ComponentDataArray<TransformInternal.ReceivedUpdates> Updates;
             [ReadOnly] public ComponentDataArray<TransformInternal.Component> CurrentTransform;
             [ReadOnly] public ComponentDataArray<NotAuthoritative<TransformInternal.Component>> DenotesNotAuthoritative;
@@ -44,12 +45,13 @@ namespace Improbable.Gdk.TransformSynchronization
         {
             for (int i = 0; i < data.Length; ++i)
             {
+                var config = data.Config[i];
                 var transformBuffer = data.TransformBuffer[i];
                 var lastTransformApplied = data.LastTransformValue[i].Transform;
 
                 // todo enable smear
                 // Need to take smear into account here when it's turned on
-                if (transformBuffer.Length >= TransformSynchronizationConfig.MaxLoadMatchedBufferSize)
+                if (transformBuffer.Length >= config.MaxLoadMatchedBufferSize)
                 {
                     transformBuffer.Clear();
                 }
@@ -75,7 +77,7 @@ namespace Improbable.Gdk.TransformSynchronization
                     //     TransformSynchronizationConfig.MaxTickSmearFactor);
 
                     uint ticksToFill = math.max(
-                        (uint) (TransformSynchronizationConfig.TargetLoadMatchedBufferSize * tickSmearFactor), 1);
+                        (uint) (config.TargetBufferSize * tickSmearFactor), 1);
 
                     if (ticksToFill > 1)
                     {
@@ -193,6 +195,7 @@ namespace Improbable.Gdk.TransformSynchronization
             };
         }
 
+        // needs to have smeared ticks applied the result
         private static BufferedTransform InterpolateValues(BufferedTransform first, BufferedTransform second,
             uint ticksAfterFirst)
         {
@@ -202,7 +205,7 @@ namespace Improbable.Gdk.TransformSynchronization
                 Position = Vector3.Lerp(first.Position, second.Position, t),
                 Velocity = Vector3.Lerp(first.Velocity, second.Velocity, t),
                 Orientation = Quaternion.Slerp(first.Orientation, second.Orientation, t),
-                PhysicsTick = ticksAfterFirst
+                PhysicsTick = first.PhysicsTick + ticksAfterFirst
             };
         }
     }

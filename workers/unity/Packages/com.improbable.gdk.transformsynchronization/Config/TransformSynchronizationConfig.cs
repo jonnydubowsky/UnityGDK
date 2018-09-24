@@ -2,8 +2,6 @@ namespace Improbable.Gdk.TransformSynchronization
 {
     public class TransformSynchronizationConfig
     {
-        public const int MaxLoadMatchedBufferSize = 15;
-        public const int TargetLoadMatchedBufferSize = 10;
         public const int MaxTickSmearFactor = 1;
 
         public const float MaxTransformUpdateRateHz = 30.0f;
