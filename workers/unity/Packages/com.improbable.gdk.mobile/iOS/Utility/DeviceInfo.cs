@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Packages.com.improbable.gdk.ios.Utility
+namespace Improbable.Gdk.Mobile.Ios
 {
     public class DeviceInfo
     {

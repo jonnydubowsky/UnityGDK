@@ -69,6 +69,7 @@ namespace Improbable.Gdk.Core
                 }
 
                 var worker = new Worker(config.WorkerType, connection, logger, origin);
+                Debug.Log("Successfully created a worker");
                 logger.HandleLog(LogType.Log, new LogEvent("Successfully created a worker")
                     .WithField("WorkerId", worker.WorkerId));
                 return worker;

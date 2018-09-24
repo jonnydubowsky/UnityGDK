@@ -10,6 +10,7 @@
         "Unity.Mathematics",
         "Improbable.Gdk.Generated",
         "Improbable.Gdk.StandardLibraryUtils",
+        "Improbable.Gdk.Mobile",
         "Improbable.Gdk.Android"
     ],
     "optionalUnityReferences": [],

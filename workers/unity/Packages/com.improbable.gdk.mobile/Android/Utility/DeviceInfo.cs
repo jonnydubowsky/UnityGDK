@@ -1,9 +1,11 @@
 using UnityEngine;
 
-namespace Improbable.Gdk.Android
+namespace Improbable.Gdk.Mobile.Android
 {
     public class DeviceInfo
     {
+        public const string AndroidStudioEmulatorDefaultCallbackIp = "10.0.2.2";
+
         private static readonly AndroidJavaObject Build = new AndroidJavaObject("android.os.Build");
         private static readonly string Fingerprint = GetValue("FINGERPRINT");
         private static readonly string Model = GetValue("MODEL");
