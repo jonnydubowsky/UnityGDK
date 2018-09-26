@@ -2,7 +2,7 @@ using Improbable.Gdk.Core;
 
 namespace Improbable.Gdk.Mobile
 {
-    public abstract class MobileWorkerConnectorBase : WorkerConnectorBase
+    public abstract class MobileWorkerConnector : WorkerConnector
     {
         protected abstract string GetHostIp();
 

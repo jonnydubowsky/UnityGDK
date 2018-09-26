@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d285c0d046d440682a00494d869d733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelPrefab: {fileID: 0}
   MaxConnectionAttempts: 3
   UseExternalIp: 1
+  Input: {fileID: 0}
+  Button: {fileID: 0}
+  Level: {fileID: 1652884293046250, guid: 849b7fe21c599e842ae89f79f70c0f6d, type: 2}
