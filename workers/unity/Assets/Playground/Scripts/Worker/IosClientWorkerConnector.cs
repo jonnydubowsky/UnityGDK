@@ -15,6 +15,7 @@ namespace Playground.Worker
         public GameObject Level;
 
         private GameObject levelInstance;
+        private bool connected;
         private InputField input;
         private Button button;
         private Text errorMessage;
@@ -49,6 +50,7 @@ namespace Playground.Worker
             levelInstance = Instantiate(Level, transform);
             levelInstance.transform.SetParent(null);
 
+            connected = true;
             ConnectionPanel.SetActive(false);
 
             PlayerPrefs.SetString("cachedIp", input.text);
@@ -82,6 +84,16 @@ namespace Playground.Worker
 
         public override void Dispose()
         {
+            if (levelInstance != null)
+            {
+                Destroy(levelInstance);
+            }
+
+            if (connected)
+            {
+                Destroy(this);
+            }
+
             Worker?.Dispose();
             Worker = null;
         }
