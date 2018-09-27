@@ -52,7 +52,7 @@ namespace Playground.Worker
 
         protected override void HandleWorkerConnectionFailure()
         {
-            errorMessage.text = "YOLO";
+            errorMessage.text = "Connection failed. Please check the entered IP.";
         }
 
         private string GetIpFromField()
@@ -72,6 +72,12 @@ namespace Playground.Worker
             return hostIp;
 #endif
             throw new NotImplementedException("Incompatible platform: Please use Android");
+        }
+
+        public override void Dispose()
+        {
+            Worker?.Dispose();
+            Worker = null;
         }
     }
 }

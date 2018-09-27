@@ -74,5 +74,11 @@ namespace Playground.Worker
             throw new NotImplementedException("Incompatible platform: Please use iOS");
 #endif
         }
+
+        public override void Dispose()
+        {
+            Worker?.Dispose();
+            Worker = null;
+        }
     }
 }
