@@ -24,6 +24,8 @@ namespace Playground.Worker
             input = ConnectionPanel.transform.Find("ConnectInput").GetComponent<InputField>();
             button = ConnectionPanel.transform.Find("ConnectButton").GetComponent<Button>();
             errorMessage = ConnectionPanel.transform.Find("ConnectionError").GetComponent<Text>();
+
+            input.text = PlayerPrefs.GetString("cachedIp");
         }
 
         public void Start()
@@ -48,6 +50,9 @@ namespace Playground.Worker
             levelInstance.transform.SetParent(null);
 
             ConnectionPanel.SetActive(false);
+
+            PlayerPrefs.SetString("cachedIp", input.text);
+            PlayerPrefs.Save();
         }
 
         protected override void HandleWorkerConnectionFailure()
