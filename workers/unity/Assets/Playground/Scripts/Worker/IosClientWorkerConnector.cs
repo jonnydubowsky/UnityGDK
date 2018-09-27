@@ -1,6 +1,8 @@
-#if UNITY_IOS
+using System;
 using Improbable.Gdk.Mobile;
+#if UNITY_IOS
 using Improbable.Gdk.Mobile.Ios;
+#endif
 using Improbable.Gdk.Core;
 using UnityEngine;
 using UnityEngine.UI;
@@ -60,6 +62,7 @@ namespace Playground.Worker
 
         protected override string GetHostIp()
         {
+#if UNITY_IOS
             var hostIp = GetIpFromField();
             if (DeviceInfo.IsIosSimulator() && hostIp.Equals(string.Empty))
             {
@@ -67,7 +70,9 @@ namespace Playground.Worker
             }
 
             return hostIp;
+#else
+            throw new NotImplementedException("Incompatible platform: Please use iOS");
+#endif
         }
     }
 }
-#endif

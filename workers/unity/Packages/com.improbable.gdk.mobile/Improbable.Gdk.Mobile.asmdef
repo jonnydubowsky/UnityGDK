@@ -4,11 +4,7 @@
         "Improbable.Gdk.Core"
     ],
     "optionalUnityReferences": [],
-    "includePlatforms": [
-        "Android",
-        "Editor",
-        "iOS"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false
 }

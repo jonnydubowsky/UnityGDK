@@ -1,6 +1,8 @@
-#if UNITY_ANDROID
+using System;
 using Improbable.Gdk.Mobile;
+#if UNITY_ANDROID
 using Improbable.Gdk.Mobile.Android;
+#endif
 using Improbable.Gdk.Core;
 using UnityEngine;
 using UnityEngine.UI;
@@ -60,14 +62,16 @@ namespace Playground.Worker
 
         protected override string GetHostIp()
         {
+#if UNITY_ANDROID
             var hostIp = GetIpFromField();
-            if (DeviceInfo.IsAndroidStudioEmulator() && hostIp.Equals(string.Empty))
+            if (Application.isMobilePlatform && DeviceInfo.IsAndroidStudioEmulator() && hostIp.Equals(string.Empty))
             {
                 return DeviceInfo.AndroidStudioEmulatorDefaultCallbackIp;
             }
 
             return hostIp;
+#endif
+            throw new NotImplementedException("Incompatible platform: Please use Android");
         }
     }
 }
-#endif
